@@ -7,6 +7,29 @@
     <title>To Do List</title>
 </head>
 <body>
-    
+    <input type="text" id="newItemInput"> <button onclick="add()">Add</button>
+    <ul id="toDoList">
+    </ul>
+    <script>
+        const toDoList = document.getElementById('toDoList');
+        const newItemInput = document.getElementById("newItemInput")
+        function toggleDone(event) {
+            event.target.classList.toggle("done");
+        }
+        function add(){
+        const newItem = document.createElement('li');
+        newItem.addEventListener("click", toggleDone)
+        newItem.innerHTML = newItemInput.value;
+        newItemInput.value = '';
+        toDoList.append(newItem);
+        }
+    </script>
+    <style>
+        .done{
+            text-decoration: line-through;
+        }
+        
+    </style>
+
 </body>
 </html>
