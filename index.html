@@ -1,35 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Do List</title>
 </head>
+
 <body>
     <input type="text" id="newItemInput"> <button onclick="add()">Add</button>
     <ul id="toDoList">
     </ul>
     <script>
         const toDoList = document.getElementById('toDoList');
-        const newItemInput = document.getElementById("newItemInput")
+        const newItemInput = document.getElementById("newItemInput");
+
+        function delte(event) {
+            event.target.parentElement.remove();
+        }
+
         function toggleDone(event) {
             event.target.classList.toggle("done");
         }
-        function add(){
-        const newItem = document.createElement('li');
-        newItem.addEventListener("click", toggleDone)
-        newItem.innerHTML = newItemInput.value;
-        newItemInput.value = '';
-        toDoList.append(newItem);
+        
+        function add() {
+            const newItemButton = document.createElement('button');
+            newItemButton.innerText = 'X';
+            newItemButton.addEventListener("click", delte);
+
+            const newItem = document.createElement('li');
+            newItem.addEventListener("click", toggleDone)
+            newItem.innerHTML = newItemInput.value;
+            newItem.appendChild(newItemButton);
+            toDoList.append(newItem);
+            
+            newItemInput.value = '';
         }
     </script>
     <style>
-        .done{
+        body {
+            background-color: black;
+            color: whitesmoke;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #inputBlock {
+            margin-top: 3 rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        ul {
+            padding: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            list-style-type: none;
+            background-color: rgba(255, 255, 255, .1);
+            padding: 0.5 rem;
+            margin: 0.1 rem;
+            border-radius: 0.3 rem;
+        }
+
+        li button {
+            border-radius: 0.3 rem;
+            border-color: black;
+        }
+
+        li.done {
             text-decoration: line-through;
         }
-        
     </style>
 
 </body>
+
 </html>
